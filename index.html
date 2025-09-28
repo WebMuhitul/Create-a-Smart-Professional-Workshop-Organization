@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrgChart Designer - Professional Organizational Charts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #42b883;
+            --info-color: #339af0;
+            --warning-color: #fcc419;
+            --danger-color: #f03e3e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 150px 0 100px;
+            text-align: center;
+            background-image: url(https://i.postimg.cc/TYny2rPC/5714992.jpg;);
+            width: 100;
+            background-repeat: no-repeat;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #495057;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            border: 2px solid var(--primary-color);
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .feature-card p {
+            color: #6c757d;
+        }
+        
+        /* Demo Section */
+        .demo {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .demo-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .demo-image {
+            flex: 1;
+        }
+        
+        .demo-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-content {
+            flex: 1;
+        }
+        
+        .demo-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .demo-content p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 25px;
+        }
+        
+        .demo-list {
+            list-style: none;
+        }
+        
+        .demo-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .demo-list i {
+            color: var(--success-color);
+            margin-right: 10px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: """;
+            font-size: 5rem;
+            color: rgba(67, 97, 238, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+        
+        .testimonial-text {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #495057;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn-light {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .demo-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-sitemap"></i>
+                    <span>OrgChart Designer</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="help.html">Help</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#" class="cta-button">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Create Professional Organizational Charts in Minutes</h1>
+            <p>Design, edit, and share beautiful organizational charts with our easy-to-use platform. Perfect for HR departments, managers, and business owners.</p>
+            <div class="hero-buttons">
+                <a href="dashboard.html" class="btn-primary">Start Creating</a>
+                <a href="features.html" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Features for Your Organization</h2>
+                <p>Everything you need to create professional organizational charts</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Easy Editing</h3>
+                    <p>Quickly update names, positions, and IDs with our intuitive editor. No design skills required.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Multiple Export Options</h3>
+                    <p>Export your charts to PowerPoint, Excel, PDF, and more. Share with anyone, anywhere.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Beautiful Templates</h3>
+                    <p>Choose from professionally designed templates with attractive color schemes and layouts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Collaboration</h3>
+                    <p>Work with your team to create and update organizational charts in real-time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Storage</h3>
+                    <p>All your charts are securely stored in the cloud. Access them from any device.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Create and edit charts on any device. Our platform works perfectly on mobile, tablet, and desktop.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo">
+        <div class="container">
+            <div class="demo-container">
+                <div class="demo-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzXDv6DoqMx8U6Wb09gjS-4RLC-SHCXK71l9AYGecwDUB_hWoN9u_ckAmO_AzQfItGjLk&usqp=CAU" alt="OrgChart Designer Demo">
+                </div>
+                <div class="demo-content">
+                    <h2>Simple Yet Powerful</h2>
+                    <p>Our organizational chart designer is built for ease of use without sacrificing functionality. Create professional charts in just a few clicks.</p>
+                    <ul class="demo-list">
+                        <li><i class="fas fa-check-circle"></i> Drag and drop interface</li>
+                        <li><i class="fas fa-check-circle"></i> Pre-built templates</li>
+                        <li><i class="fas fa-check-circle"></i> Customizable colors and styles</li>
+                        <li><i class="fas fa-check-circle"></i> Automatic layout adjustments</li>
+                        <li><i class="fas fa-check-circle"></i> Import data from Excel</li>
+                    </ul>
+                    <a href="dashboard.html" class="btn-primary">Try It Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Users Say</h2>
+                <p>Join thousands of satisfied customers who use OrgChart Designer</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">OrgChart Designer has transformed how we create and share our organizational structure. It's intuitive and saves us hours of work.</p>
+                    <div class="testimonial-author">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzIJDNaWFPDga2VWx9G4rM2IST-kPixumaw&s" alt="Sarah Johnson" class="author-image">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>HR Director, TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The export options are fantastic! I can easily create charts for presentations, reports, and our company intranet.</p>
+                    <div class="testimonial-author">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2igW6s-dVmqIp0HXboWuZ2tyOnedMFR1-yg&s" alt="Michael Chen" class="author-image">
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Operations Manager, Global Industries</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">As a growing company, our organizational structure changes frequently. This tool makes it easy to keep everyone updated.</p>
+                    <div class="testimonial-author">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiKYQhpRBt4hL6wBwFKROxaewFCSl_NTvT_w&s" alt="Emily Rodriguez" class="author-image">
+                        <div class="author-info">
+                            <h4>Emily Rodriguez</h4>
+                            <p>CEO, StartupX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Create Your Organizational Chart?</h2>
+            <p>Join thousands of professionals who use OrgChart Designer to create beautiful, professional organizational charts.</p>
+            <a href="dashboard.html" class="btn-light">Get Started for Free</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>OrgChart Designer</h3>
+                    <p>Create professional organizational charts in minutes. Perfect for HR departments, managers, and business owners.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="export.html">Export Options</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="tutorials.html">Tutorials</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 OrgChart Designer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
